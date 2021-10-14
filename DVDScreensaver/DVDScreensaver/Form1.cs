@@ -39,10 +39,25 @@ namespace DVDScreensaver
             }
         }
 
+        Random ran = new Random();
+
         void MachWas()
         {
-            Console.Beep(400, 600);
+            //Console.Beep(400, 200);
 
+            BackColor = GetRandomColor();
+            button1.BackColor = GetRandomColor();
+        }
+
+        Color GetRandomColor()
+        {
+            int r = ran.Next(256);
+            int g = ran.Next(256);
+            int b = ran.Next(256);
+
+            Color myColor = Color.FromArgb(r, g, b);
+
+            return myColor;
         }
 
     }
