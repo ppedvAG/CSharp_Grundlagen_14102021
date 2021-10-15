@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -57,8 +58,53 @@ namespace KatzenUI
             if (saveFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 StreamWriter sw = new StreamWriter(saveFileDialog1.FileName);
-                sw.WriteLine("Hallo Welt");
+
+                string trenn = "|";
+                foreach (Katze katze in katzenListe)
+                {
+                    sw.Write(katze.Name);
+                    sw.Write(trenn);
+                    sw.Write(katze.GebDatum);
+                    sw.Write(trenn);
+                    sw.Write(katze.Farbe);
+                    sw.Write(trenn);
+                    sw.Write(katze.Rasse);
+                    sw.Write(trenn);
+                    sw.Write(katze.Gewicht);
+                    sw.Write(trenn);
+                    sw.Write(katze.Geschlecht);
+                    sw.Write(trenn);
+
+                    sw.WriteLine();
+                }
+
                 sw.Close();
+            }
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                katzenListe.Clear(); // UI leeren
+                StreamReader sr = new StreamReader(openFileDialog1.FileName);
+                while (!sr.EndOfStream) //lese solange nicht das Ende der Datei erreicht ist
+                {
+                    string line = sr.ReadLine(); //eine Zeile lesen
+                    Debug.WriteLine(line); //zum testen die Zeile im Outputfenster von Visual Studio
+
+                    string[] chunks = line.Split('|'); //die zeile in einzelne häppchen trennen
+
+                    Katze katze = new Katze(); // neue Katze erstellen 
+                    katze.Name = chunks[0]; //die jeweiligen werden zuweise 
+                    katze.GebDatum = DateTime.Parse(chunks[1]); // oder parsen
+                    katze.Farbe = chunks[2];
+                    katze.Rasse = chunks[3];
+                    katze.Gewicht = double.Parse(chunks[4]);
+                    katze.Geschlecht = Enum.Parse<Geschlecht>(chunks[5]);
+
+                    katzenListe.Add(katze); //der Liste im UI hinzufügen
+                }
             }
         }
     }
