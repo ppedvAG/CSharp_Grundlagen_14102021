@@ -26,8 +26,8 @@ namespace KatzenUI
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Katze katze = new Katze();
-            katze.Name = "Henry";
+            Katze katze = new Katze("Fred");
+            //katze.Name = "Henry";
             katze.Gewicht = 6.2;
             katze.Farbe = "black tabby";
             katze.Rasse = "maine coon";

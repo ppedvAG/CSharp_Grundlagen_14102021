@@ -11,6 +11,16 @@ namespace HalloKlassen
         public string Rasse { get; set; }
         public double Gewicht { get; set; }
         public Geschlecht Geschlecht { get; set; }
+
+        public Katze() //default konstruktor
+        {
+            Farbe = "weiss";
+        }
+
+        public Katze(string name)
+        {
+            Name = name;
+        }
     }
 
 }
