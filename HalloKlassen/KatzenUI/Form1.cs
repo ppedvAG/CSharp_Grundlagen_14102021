@@ -16,7 +16,7 @@ namespace KatzenUI
 {
     public partial class Form1 : Form
     {
-        BindingList<Katze> katzenListe = new BindingList<Katze>();
+        BindingList<Tier> katzenListe = new BindingList<Tier>();
 
         public Form1()
         {
@@ -26,7 +26,7 @@ namespace KatzenUI
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Katze katze = new Katze("Fred");
+            Tier katze = new Tier("Fred");
             //katze.Name = "Henry";
             katze.Gewicht = 6.2;
             katze.Farbe = "black tabby";
@@ -40,7 +40,7 @@ namespace KatzenUI
 
         private void button2_Click(object sender, EventArgs e)
         {
-            Faker<Katze> faker = new Faker<Katze>("de")
+            Faker<Tier> faker = new Faker<Tier>("de")
                                 .RuleFor(x => x.Name, (f, u) => f.Name.FirstName())
                                 .RuleFor(x => x.Gewicht, (f, u) => f.Random.Double(1, 7))
                                 .RuleFor(x => x.Farbe, (f, u) => f.Commerce.Color())
@@ -48,7 +48,7 @@ namespace KatzenUI
                                 .RuleFor(x => x.GebDatum, (f, u) => f.Date.Recent())
                                 .RuleFor(x => x.Geschlecht, (f, u) => f.PickRandom<Geschlecht>());
 
-            Katze bogusKatze = faker.Generate();
+            Tier bogusKatze = faker.Generate();
 
             katzenListe.Add(bogusKatze);
         }
@@ -60,7 +60,7 @@ namespace KatzenUI
                 StreamWriter sw = new StreamWriter(saveFileDialog1.FileName);
 
                 string trenn = "|";
-                foreach (Katze katze in katzenListe)
+                foreach (Tier katze in katzenListe)
                 {
                     sw.Write(katze.Name);
                     sw.Write(trenn);
@@ -95,7 +95,7 @@ namespace KatzenUI
 
                     string[] chunks = line.Split('|'); //die zeile in einzelne häppchen trennen
 
-                    Katze katze = new Katze(); // neue Katze erstellen 
+                    Tier katze = new Tier(); // neue Katze erstellen 
                     katze.Name = chunks[0]; //die jeweiligen werden zuweise 
                     katze.GebDatum = DateTime.Parse(chunks[1]); // oder parsen
                     katze.Farbe = chunks[2];

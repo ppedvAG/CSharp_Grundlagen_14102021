@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace HalloKlassen
 {
-    public class Katze : Tier
+    public class Hund : Tier
     {
-        public void Miauen()
+        public void Bellen()
         {
-            Console.WriteLine("Miez");
+            Console.WriteLine("Wuff Wuff");
         }
     }
 }
