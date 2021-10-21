@@ -1,6 +1,9 @@
 ﻿using System;
+using System.Drawing;
 using System.Net;
 using System.Net.Http;
+using System.Text;
+using System.Text.Json;
 using System.Windows.Forms;
 
 namespace HundeFakten
@@ -27,11 +30,48 @@ namespace HundeFakten
             //ohne Proxy
             HttpClient http = new HttpClient();
 
+
             http.Timeout = TimeSpan.FromSeconds(5); //damit der fehler schneller kommt 
 
             string json = await http.GetStringAsync(url);
 
-            listBox1.Items.Insert(0, json);
+            string cleaned = CleanJsonString(json);
+
+            listBox1.Items.Insert(0, cleaned);
+
+            button1.Enabled = true;
+        }
+
+        private string CleanJsonString(string jsonString)
+        {
+            jsonString = Encoding.UTF8.GetString(Encoding.Convert(Encoding.UTF8, Encoding.Default, Encoding.Default.GetBytes(jsonString)));
+            jsonString = jsonString.Replace("[", "");
+            jsonString = jsonString.Replace("]", "");
+            jsonString = jsonString.Replace("{", "");
+            jsonString = jsonString.Replace("}", "");
+            jsonString = jsonString.Replace("\"fact\":", "");
+            jsonString = jsonString.Replace("\"", "");
+            jsonString = jsonString.Replace("\\u2019", "'");
+            jsonString = jsonString.Trim();
+            return jsonString;
+        }
+
+        private async void button2_Click(object sender, EventArgs e)
+        {
+            button1.Enabled = false;
+            //mit ohne Proxy
+            HttpClient http = new HttpClient();
+            string testBildUrl = "https://random.dog/e1311960-ea27-49a2-9789-d854f4500fea.gif";
+
+
+            string json = await http.GetStringAsync("https://random.dog/woof.json"); //json  text laden
+            //{"fileSizeBytes":135518,"url":"https://random.dog/102a6197-7c40-410d-b97f-fa920aa29f28.jpg"}
+
+            HundeBild hundeBild = JsonSerializer.Deserialize<HundeBild>(json); //json text in HundeBild Klassen instanz serialisieren
+
+            label1.Text = $"{hundeBild.fileSizeBytes} bytes"; //größe des Bildes aus der Klasse im Label anzeigen 
+            Image img = Image.FromStream(await http.GetStreamAsync(hundeBild.url)); //Bild aus JSON/HundeBild URL runterladen
+            pictureBox1.Image = img; // bild anzeigen
 
             button1.Enabled = true;
         }
