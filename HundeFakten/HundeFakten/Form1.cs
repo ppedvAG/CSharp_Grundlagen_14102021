@@ -56,24 +56,77 @@ namespace HundeFakten
             return jsonString;
         }
 
+
+        int hundeCounter = 0;
+
         private async void button2_Click(object sender, EventArgs e)
         {
-            button1.Enabled = false;
-            //mit ohne Proxy
-            HttpClient http = new HttpClient();
-            string testBildUrl = "https://random.dog/e1311960-ea27-49a2-9789-d854f4500fea.gif";
+            button2.Enabled = false;
+            hundeCounter++;
+            try
+            {
+                if (hundeCounter > 5)
+                    throw new HundeOverloadException() { HundeCounter = hundeCounter };
 
+                //mit ohne Proxy
+                HttpClient http = new HttpClient();
+                string testBildUrl = "https://random.dog/e1311960-ea27-49a2-9789-d854f4500fea.gif";
 
-            string json = await http.GetStringAsync("https://random.dog/woof.json"); //json  text laden
-            //{"fileSizeBytes":135518,"url":"https://random.dog/102a6197-7c40-410d-b97f-fa920aa29f28.jpg"}
+                string json = await http.GetStringAsync("https://random.dog/woof.json"); //json  text laden
 
-            HundeBild hundeBild = JsonSerializer.Deserialize<HundeBild>(json); //json text in HundeBild Klassen instanz serialisieren
+                HundeBild hundeBild = JsonSerializer.Deserialize<HundeBild>(json); //json text in HundeBild Klassen instanz serialisieren
 
-            label1.Text = $"{hundeBild.fileSizeBytes} bytes"; //größe des Bildes aus der Klasse im Label anzeigen 
-            Image img = Image.FromStream(await http.GetStreamAsync(hundeBild.url)); //Bild aus JSON/HundeBild URL runterladen
-            pictureBox1.Image = img; // bild anzeigen
+                label1.Text = $"{hundeBild.fileSizeBytes} bytes"; //größe des Bildes aus der Klasse im Label anzeigen 
+                Image img = Image.FromStream(await http.GetStreamAsync(hundeBild.url)); //Bild aus JSON/HundeBild URL runterladen
+                pictureBox1.Image = img; // bild anzeigen
 
-            button1.Enabled = true;
+            }
+            catch (HundeOverloadException ex)
+            {
+                MessageBox.Show($"Du hast schon genug Hunde gesehen, es waren ja immerhin schon {ex.HundeCounter}");
+            }
+            catch (HttpRequestException ex)
+            {
+                MessageBox.Show($"Fehler beim download: {ex.Message}");
+            }
+            catch (ArgumentException ex)
+            {
+                MessageBox.Show($"Fehler beim anzeigen des Bildes: {ex.Message}: {ex.ParamName}");
+            }
+            catch (SystemException ex)
+            {
+                MessageBox.Show($"Fehler beim anzeigen des Bildes: {ex.Message}");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Fehler: {ex.Message}");
+            }
+
+            button2.Enabled = true;
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                WerfeEinenFehler();
+            }
+            catch (InvalidOperationException ex)
+            {
+                MessageBox.Show($"Da klappt etwas nicht: {ex.Message}");
+            }
+        }
+
+        /// <summary>
+        /// Wirft einen Fehler
+        /// </summary>
+        /// <remarks>
+        /// Diese Methode dient als Beispiel zum werfen von Exception
+        /// </remarks>
+        /// <exception cref="InvalidOperationException"/>
+        private void WerfeEinenFehler()
+        {
+            throw new InvalidOperationException("Das geht so nicht!");
         }
     }
 }
