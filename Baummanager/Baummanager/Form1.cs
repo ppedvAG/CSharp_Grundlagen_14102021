@@ -38,7 +38,7 @@ namespace Baummanager
         {
             if (jsonRadioButton.Checked)
             {
-                datamanager = new Datamanager();
+                datamanager = new Datamanager(new Data.DataProviders.JsonData(), "baum.json");
             }
         }
 

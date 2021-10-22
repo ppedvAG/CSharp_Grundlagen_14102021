@@ -5,16 +5,23 @@ namespace Baummanager.Data
 {
     public class Datamanager
     {
-        public IData Data { get; } = new DataProviders.JsonData();
+        public IData Data { get; }
+        public string Datasource { get; }
+
+        public Datamanager(IData data, string datasource) //dependency injection goes into here
+        {
+            Data = data;
+            Datasource = datasource;
+        }
 
         public IEnumerable<Baum> GetBaums()
         {
-            return Data.LoadBäume("baum.json");
+            return Data.LoadBäume(Datasource);
         }
 
         public void SaveAll(IEnumerable<Baum> bäume)
         {
-            Data.SaveBäume("baum.json", bäume);
+            Data.SaveBäume(Datasource, bäume);
         }
 
     }
