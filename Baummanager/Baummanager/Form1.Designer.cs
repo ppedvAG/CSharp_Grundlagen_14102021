@@ -102,6 +102,7 @@ namespace Baummanager
             this.excelRadioButton.TabIndex = 3;
             this.excelRadioButton.Text = "EXCEL";
             this.excelRadioButton.UseVisualStyleBackColor = true;
+            this.excelRadioButton.CheckedChanged += new System.EventHandler(this.excelRadioButton_CheckedChanged);
             // 
             // demoRadioButton
             // 

@@ -3,6 +3,7 @@ using Baummanager.Data;
 using Baummanager.Model;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace Baummanager
@@ -28,7 +29,7 @@ namespace Baummanager
             }
             else
             {
-                baumDataGridView.DataSource = datamanager.GetBaums();
+                baumDataGridView.DataSource = datamanager.GetBaums().ToList();
             }
         }
 
@@ -52,6 +53,14 @@ namespace Baummanager
             else if (datamanager == null)
             {
                 MessageBox.Show("Bitte Datenquelle festlegen", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void excelRadioButton_CheckedChanged(object sender, EventArgs e)
+        {
+            if (excelRadioButton.Checked)
+            {
+                datamanager = new Datamanager(new Data.DataProviders.ExcelData(), "bäume.xlsx");
             }
         }
     }
