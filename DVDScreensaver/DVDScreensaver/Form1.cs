@@ -22,18 +22,18 @@ namespace DVDScreensaver
         int speedY = 3;
         private void timer1_Tick(object sender, EventArgs e)
         {
-            button1.Left += speedX;
-            button1.Top += speedY;
+            myButton1.Left += speedX;
+            myButton1.Top += speedY;
 
-            if (button1.Left + button1.Width >= ClientRectangle.Width ||
-                button1.Left <= 0)
+            if (myButton1.Left + myButton1.Width >= ClientRectangle.Width ||
+                myButton1.Left <= 0)
             {
                 speedX *= -1;
                 MachWas();
             }
 
-            if (button1.Top + button1.Height >= ClientRectangle.Height ||
-                button1.Top <= 0)
+            if (myButton1.Top + myButton1.Height >= ClientRectangle.Height ||
+                myButton1.Top <= 0)
             {
                 speedY *= -1;
                 MachWas();
@@ -47,7 +47,7 @@ namespace DVDScreensaver
             //Console.Beep(400, 200);
 
             BackColor = GetRandomColor();
-            button1.BackColor = GetRandomColor();
+            myButton1.BackColor = GetRandomColor();
         }
 
         Color GetRandomColor()
