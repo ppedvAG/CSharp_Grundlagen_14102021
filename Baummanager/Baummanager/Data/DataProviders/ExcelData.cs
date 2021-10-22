@@ -26,9 +26,9 @@ namespace Baummanager.Data.DataProviders
                         {
                             Id = int.Parse(ws.Row(row).Cell(1).Value.ToString()),
                             Art = ws.Row(row).Cell(2).Value.ToString(),
-                            Gattung = Enum.Parse<Gattung>(ws.Row(row).Cell(1).Value.ToString()),
-                            MaxAlter = int.Parse(ws.Row(row).Cell(1).Value.ToString()),
-                            MaxSize = double.Parse(ws.Row(row).Cell(1).Value.ToString()),
+                            Gattung = Enum.Parse<Gattung>(ws.Row(row).Cell(3).Value.ToString()),
+                            MaxAlter = int.Parse(ws.Row(row).Cell(4).Value.ToString()),
+                            MaxSize = double.Parse(ws.Row(row).Cell(5).Value.ToString()),
                         };
                         row++;
                     }
