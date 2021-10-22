@@ -63,5 +63,28 @@ namespace Baummanager
                 datamanager = new Datamanager(new Data.DataProviders.ExcelData(), "bäume.xlsx");
             }
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            IEnumerable<Baum> baums = (IEnumerable<Baum>)baumDataGridView.DataSource;
+
+            //linq query expression
+            var query = from b in baums
+                        where b.MaxAlter > 100
+                        orderby b.MaxSize descending
+                        select b;
+
+            baumDataGridView.DataSource = query.ToList();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            IEnumerable<Baum> baums = (IEnumerable<Baum>)baumDataGridView.DataSource;
+
+            baumDataGridView.DataSource = baums.Where(b => b.MaxAlter > 100) //linq lambda
+                                               .OrderByDescending(x => x.MaxSize)
+                                               .Take(100)
+                                               .ToList();
+        }
     }
 }

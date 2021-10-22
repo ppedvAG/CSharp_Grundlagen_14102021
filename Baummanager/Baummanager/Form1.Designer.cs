@@ -35,7 +35,9 @@ namespace Baummanager
             this.jsonRadioButton = new System.Windows.Forms.RadioButton();
             this.excelRadioButton = new System.Windows.Forms.RadioButton();
             this.demoRadioButton = new System.Windows.Forms.RadioButton();
+            this.button1 = new System.Windows.Forms.Button();
             this.baumDataGridView = new System.Windows.Forms.DataGridView();
+            this.button2 = new System.Windows.Forms.Button();
             this.flowLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.baumDataGridView)).BeginInit();
             this.SuspendLayout();
@@ -50,10 +52,12 @@ namespace Baummanager
             this.flowLayoutPanel1.Controls.Add(this.jsonRadioButton);
             this.flowLayoutPanel1.Controls.Add(this.excelRadioButton);
             this.flowLayoutPanel1.Controls.Add(this.demoRadioButton);
+            this.flowLayoutPanel1.Controls.Add(this.button1);
+            this.flowLayoutPanel1.Controls.Add(this.button2);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(852, 48);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(852, 104);
             this.flowLayoutPanel1.TabIndex = 0;
             // 
             // ladenButton
@@ -84,7 +88,7 @@ namespace Baummanager
             // 
             this.jsonRadioButton.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.jsonRadioButton.AutoSize = true;
-            this.jsonRadioButton.Location = new System.Drawing.Point(233, 6);
+            this.jsonRadioButton.Location = new System.Drawing.Point(233, 8);
             this.jsonRadioButton.Name = "jsonRadioButton";
             this.jsonRadioButton.Size = new System.Drawing.Size(103, 36);
             this.jsonRadioButton.TabIndex = 2;
@@ -96,7 +100,7 @@ namespace Baummanager
             // 
             this.excelRadioButton.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.excelRadioButton.AutoSize = true;
-            this.excelRadioButton.Location = new System.Drawing.Point(342, 6);
+            this.excelRadioButton.Location = new System.Drawing.Point(342, 8);
             this.excelRadioButton.Name = "excelRadioButton";
             this.excelRadioButton.Size = new System.Drawing.Size(109, 36);
             this.excelRadioButton.TabIndex = 3;
@@ -109,7 +113,7 @@ namespace Baummanager
             this.demoRadioButton.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.demoRadioButton.AutoSize = true;
             this.demoRadioButton.Checked = true;
-            this.demoRadioButton.Location = new System.Drawing.Point(457, 6);
+            this.demoRadioButton.Location = new System.Drawing.Point(457, 8);
             this.demoRadioButton.Name = "demoRadioButton";
             this.demoRadioButton.Size = new System.Drawing.Size(171, 36);
             this.demoRadioButton.TabIndex = 4;
@@ -117,16 +121,36 @@ namespace Baummanager
             this.demoRadioButton.Text = "Demodaten";
             this.demoRadioButton.UseVisualStyleBackColor = true;
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(634, 3);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(150, 46);
+            this.button1.TabIndex = 5;
+            this.button1.Text = "Linq ";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // baumDataGridView
             // 
             this.baumDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.baumDataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.baumDataGridView.Location = new System.Drawing.Point(0, 48);
+            this.baumDataGridView.Location = new System.Drawing.Point(0, 104);
             this.baumDataGridView.Name = "baumDataGridView";
             this.baumDataGridView.RowHeadersWidth = 82;
             this.baumDataGridView.RowTemplate.Height = 41;
-            this.baumDataGridView.Size = new System.Drawing.Size(852, 493);
+            this.baumDataGridView.Size = new System.Drawing.Size(852, 437);
             this.baumDataGridView.TabIndex = 1;
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(3, 55);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(274, 46);
+            this.button2.TabIndex = 6;
+            this.button2.Text = "Linq  Lambda";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // Form1
             // 
@@ -154,6 +178,8 @@ namespace Baummanager
         private System.Windows.Forms.RadioButton excelRadioButton;
         private System.Windows.Forms.DataGridView baumDataGridView;
         private System.Windows.Forms.RadioButton demoRadioButton;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button button2;
     }
 }
 
